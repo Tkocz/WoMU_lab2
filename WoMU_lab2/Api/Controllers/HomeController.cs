@@ -10,7 +10,7 @@ namespace Api.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "TriForce Scheduler";
 
             return View();
         }
