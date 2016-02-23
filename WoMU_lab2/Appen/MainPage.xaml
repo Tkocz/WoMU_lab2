@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Image Source="../Assets/Images/triforce_bg2.png"/>
     </Grid>
 </Page>
