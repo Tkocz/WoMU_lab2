@@ -1,16 +1,13 @@
-﻿namespace Api.Controllers {
+﻿namespace Api.Controllers
+{
 
-using Api.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Http;
 
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Web.Http;
-using System.Web.Http.Results;
-
-// These POD-classes are needed because C# sucks Satan's ass.
-public class Task {
+    // These POD-classes are needed because C# sucks Satan's ass.
+    public class Task {
     public string Id                 { get; set; }
     public string Title              { get; set; }
     public string Requirements       { get; set; }
