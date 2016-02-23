@@ -31,7 +31,7 @@ public class TriforceController : ApiController {
     private static Database1Entities db = new Database1Entities();
 
     [HttpGet]
-    public dynamic Tasks() {
+    public object Tasks() {
         var q = from task in db.Tasks
                 select new Task() {
                     Id               = task.TaskId.ToString(),
