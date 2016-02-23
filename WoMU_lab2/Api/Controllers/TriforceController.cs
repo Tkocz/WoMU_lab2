@@ -1,19 +1,20 @@
-﻿namespace Api.Controllers
-{
+﻿namespace Api.Controllers {
 
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Http;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Results;
 
-    // These POD-classes are needed because C# sucks Satan's ass.
-    public class Task {
-    public string Id                 { get; set; }
-    public string Title              { get; set; }
-    public string Requirements       { get; set; }
-    public DateTime BeginDateTime    { get; set; }
-    public DateTime DeadlineDateTime { get; set; }
-    public IEnumerable<User> Users   { get; set; }
+// These POD-classes are needed because C# sucks Satan's ass.
+public class Task {
+    public string            Id               { get; set; }
+    public string            Title            { get; set; }
+    public string            Requirements     { get; set; }
+    public DateTime          BeginDateTime    { get; set; }
+    public DateTime          DeadlineDateTime { get; set; }
+    public IEnumerable<User> Users            { get; set; }
 
 }
 
@@ -45,7 +46,22 @@ public class TriforceController : ApiController {
                 };
 
         return Json(q.ToArray());
+    }
 
+    [HttpGet]
+    public void Create(string title, string requirements, DateTime start,
+                       DateTime deadline, int userID)
+    {
+        var task = new Tasks() {
+            Title            = title,
+            Requirements     = requirements,
+            BeginDateTime    = start,
+            DeadlineDateTime = deadline,
+        };
+
+        task.Users.Add((from user in db.Users where user.UserId == userID select user).Single());
+        db.Tasks.Attach(task);
+        db.SaveChanges();
     }
 }
 

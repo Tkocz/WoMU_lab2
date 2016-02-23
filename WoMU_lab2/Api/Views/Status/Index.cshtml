@@ -1,0 +1,38 @@
+﻿<div>
+    The following tasks exist:
+    <table>
+        <tr style="border-bottom: 1px solid black;">
+            <th>ID</th>
+            <th>Title</th>
+            <th>Requirements</th>
+            <th>Start</th>
+            <th>Deadline</th>
+            <th>Users</th>
+            <th>Conflicted</th>
+        </tr>
+        @foreach (var task in Model.Tasks) {
+            <tr style="border-bottom: 1px solid black;">
+                <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px; border-left: 1px solid black; ">@task.TaskId</td>
+                <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px;">@task.Title</td>
+                <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px;">@Html.Raw(task.Requirements.Replace("|", "<br/>"))</td>
+                <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px;">@task.BeginDateTime.ToString("yyyy-MM-dd")</td>
+                <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px;">@task.DeadlineDateTime.ToString("yyyy-MM-dd")</td>
+                <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px;">
+                @foreach (var user in task.Users) {
+                    @(string.Format("{0} {1}", user.FirstName, @user.LastName))
+                    <br/>
+                }
+                </td>
+                @if (task.Users.Count > 1) {
+                    <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px; background-color: red;">&nbsp;</td>
+                }
+                else {
+                    <td style="border-right: 1px solid black; padding: 5px 5px 5px 5px; background-color: white;">&nbsp;</td>
+                }
+            </tr>
+        }
+    </table>
+    <div>
+
+    </div>
+</div>
