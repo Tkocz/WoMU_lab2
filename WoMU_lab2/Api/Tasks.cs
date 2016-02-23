@@ -20,7 +20,7 @@ namespace Api
             this.Users = new HashSet<Users>();
         }
     
-        public int TaskId { get; set; }
+        public int TaskId { get; private set; }
         public System.DateTime BeginDateTime { get; set; }
         public System.DateTime DeadlineDateTime { get; set; }
         public string Title { get; set; }

@@ -24,7 +24,57 @@ public class User {
     public string LastName  { get; set; }
 }
 
-[RoutePrefix("api/Triforce")]
+/*
+ * API-spec:
+ * 
+ * /api/triforce/tasks
+ * 
+ *   Ger en lista över alla tasks och deras users.
+ *
+ * /api/triforce/users
+ * 
+ *   Ger en lista över alla users.
+ *   
+ * /api/triforce/createtask?title=A&reqs=B&start=C&deadline=D
+ * 
+ *   Skapar en ny task.
+ *   
+ *   Parametrar:
+ *   
+ *     A=titel (ex. "Gör tomatsås")
+ *     B=requirements (ex. "Köp tomater|Köp någon mer ingrediens")
+ *     C=startdatum (ex. "2016-01-01")
+ *     D=deadlinedatum (ex. "2016-01-01")
+ *     
+ * /api/deletetask?taskID=A
+ * 
+ *   Tar bort en task.
+ *   
+ *   Parametrar:
+ *   
+ *     A=id på den task som ska tas bort.
+ * 
+ * /api/claimtask?taskID=A&userID=B
+ * 
+ *   Assignar en user till en task.
+ *   
+ *   Parametrar:
+ *   
+ *     A=id på en task
+ *     B=id på den user som ska assignas till tasken
+ *  
+ * /api/releasetask?taskID=A&userID=B
+ * 
+ *   Tar bort en user från en task.
+ *   
+ *   Parametrar:
+ *   
+ *     A=id på en task
+ *     B=id på den user som ska tas bort från tasken
+ *     
+ */
+
+[RoutePrefix("api/Triforce/")]
 public class TriforceController : ApiController {
     private static Database1Entities db = new Database1Entities();
 
@@ -49,19 +99,63 @@ public class TriforceController : ApiController {
     }
 
     [HttpGet]
-    public void Create(string title, string requirements, DateTime start,
-                       DateTime deadline, int userID)
+    public object Users() {
+        var q = from user in db.Users
+                select new User() {
+                    Id        = user.UserId.ToString(),
+                    FirstName = user.FirstName,
+                    LastName  = user.LastName
+                };
+
+        return Json(q.ToArray());
+    }
+
+    [HttpGet]
+    public object CreateTask(string title, string reqs, DateTime start,
+                             DateTime deadline)
     {
         var task = new Tasks() {
             Title            = title,
-            Requirements     = requirements,
+            Requirements     = reqs,
             BeginDateTime    = start,
             DeadlineDateTime = deadline,
         };
 
-        task.Users.Add((from user in db.Users where user.UserId == userID select user).Single());
-        db.Tasks.Attach(task);
+        db.Tasks.Add(task);
         db.SaveChanges();
+
+        return Json(task.TaskId.ToString());
+    }
+
+    [HttpGet]
+    public object DeleteTask(int taskID) {
+        var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
+
+        db.Tasks.Remove(task);
+
+        return Json("ok");
+    }
+
+    [HttpGet]
+    public object ClaimTask(int taskID, int userID) {
+        var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
+        var user = (from u in db.Users where u.UserId == userID select u).Single();
+
+        task.Users.Add(user);
+        db.SaveChanges();
+
+        return Json("ok");
+    }
+
+    [HttpGet]
+    public object ReleaseTask(int taskID, int userID) {
+        var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
+        var user = (from u in db.Users where u.UserId == userID select u).Single();
+
+        task.Users.Remove(user);
+        db.SaveChanges();
+
+        return Json("ok");
     }
 }
 

@@ -225,6 +225,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Tasks.cs">
       <DependentUpon>Database1_Model.tt</DependentUpon>
     </Compile>
