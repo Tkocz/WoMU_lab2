@@ -23,6 +23,16 @@ namespace App10.Services
             return taskModels;
         }
 
+         //* /api/triforce/createtask? title = A & reqs = B & start = C & deadline = D
+         //*
+         //* Skapar en ny task.
+         //*
+         //* Parametrar:
+         //*   
+         //*     A=titel(ex. "Gör tomatsås")
+         //*     B=requirements(ex. "Köp tomater|Köp någon mer ingrediens")
+         //*     C=startdatum(ex. "2016-01-01")
+         //*     D=deadlinedatum(ex. "2016-01-01")
         public async Task<bool> AddTaskModelAsync(TaskModel taskModel)
         {
             var httpClient = new HttpClient();
@@ -33,16 +43,24 @@ namespace App10.Services
 
             httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = await httpClient.PostAsync(WebServiceUrl + "createtask" , httpContent);
+            var result = await httpClient.GetAsync(WebServiceUrl + "createtask?"
+                +"title=" + taskModel.Title + "&reqs=" +taskModel.Requirements
+                +"&start=2015-11-12" /*+ taskModel.BeginDateTime*/ +"&deadline=2016-03-23"/* +taskModel.DeadlineDateTime*/);
 
             return result.IsSuccessStatusCode;
         }
-
+        // * /api/deletetask? taskID = A
+        // *
+        // * Tar bort en task.
+        // *
+        // * Parametrar:
+        // *   
+        // *     A=id på den task som ska tas bort.
         public async Task<bool> DeleteTaskModelAsync(TaskModel taskModel)
         {
             var httpClient = new HttpClient();
 
-            var response = await httpClient.DeleteAsync(WebServiceUrl + "deletetask" + taskModel.Id);
+            var response = await httpClient.GetAsync(WebServiceUrl + "deletetask?" +"taskId=" + taskModel.Id);
 
             return response.IsSuccessStatusCode;
         }

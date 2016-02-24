@@ -1,80 +1,68 @@
-﻿namespace Api.Controllers {
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Results;
+using Api.Models;
 
-// These POD-classes are needed because C# sucks Satan's ass.
-public class Task {
-    public string            Id               { get; set; }
-    public string            Title            { get; set; }
-    public string            Requirements     { get; set; }
-    public DateTime          BeginDateTime    { get; set; }
-    public DateTime          DeadlineDateTime { get; set; }
-    public IEnumerable<User> Users            { get; set; }
+namespace Api.Controllers
+{
 
-}
+    // These POD-classes are needed because C# sucks Satan's ass.
 
-public class User {
-    public string Id        { get; set; }
-    public string FirstName { get; set; }
-    public string LastName  { get; set; }
-}
 
-/*
- * API-spec:
- * 
- * /api/triforce/tasks
- * 
- *   Ger en lista över alla tasks och deras users.
- *
- * /api/triforce/users
- * 
- *   Ger en lista över alla users.
- *   
- * /api/triforce/createtask?title=A&reqs=B&start=C&deadline=D
- * 
- *   Skapar en ny task.
- *   
- *   Parametrar:
- *   
- *     A=titel (ex. "Gör tomatsås")
- *     B=requirements (ex. "Köp tomater|Köp någon mer ingrediens")
- *     C=startdatum (ex. "2016-01-01")
- *     D=deadlinedatum (ex. "2016-01-01")
- *     
- * /api/deletetask?taskID=A
- * 
- *   Tar bort en task.
- *   
- *   Parametrar:
- *   
- *     A=id på den task som ska tas bort.
- * 
- * /api/claimtask?taskID=A&userID=B
- * 
- *   Assignar en user till en task.
- *   
- *   Parametrar:
- *   
- *     A=id på en task
- *     B=id på den user som ska assignas till tasken
- *  
- * /api/releasetask?taskID=A&userID=B
- * 
- *   Tar bort en user från en task.
- *   
- *   Parametrar:
- *   
- *     A=id på en task
- *     B=id på den user som ska tas bort från tasken
- *     
- */
 
-[RoutePrefix("api/Triforce/")]
+    /*
+     * API-spec:
+     * 
+     * /api/triforce/tasks
+     * 
+     *   Ger en lista över alla tasks och deras users.
+     *
+     * /api/triforce/users
+     * 
+     *   Ger en lista över alla users.
+     *   
+     * /api/triforce/createtask?title=A&reqs=B&start=C&deadline=D
+     * 
+     *   Skapar en ny task.
+     *   
+     *   Parametrar:
+     *   
+     *     A=titel (ex. "Gör tomatsås")
+     *     B=requirements (ex. "Köp tomater|Köp någon mer ingrediens")
+     *     C=startdatum (ex. "2016-01-01")
+     *     D=deadlinedatum (ex. "2016-01-01")
+     *     
+     * /api/deletetask?taskID=A
+     * 
+     *   Tar bort en task.
+     *   
+     *   Parametrar:
+     *   
+     *     A=id på den task som ska tas bort.
+     * 
+     * /api/claimtask?taskID=A&userID=B
+     * 
+     *   Assignar en user till en task.
+     *   
+     *   Parametrar:
+     *   
+     *     A=id på en task
+     *     B=id på den user som ska assignas till tasken
+     *  
+     * /api/releasetask?taskID=A&userID=B
+     * 
+     *   Tar bort en user från en task.
+     *   
+     *   Parametrar:
+     *   
+     *     A=id på en task
+     *     B=id på den user som ska tas bort från tasken
+     *     
+     */
+
+    [RoutePrefix("api/Triforce/")]
 public class TriforceController : ApiController {
     private static Database1Entities db = new Database1Entities();
 
@@ -109,12 +97,12 @@ public class TriforceController : ApiController {
 
         return Json(q.ToArray());
     }
-
     [HttpGet]
     public object CreateTask(string title, string reqs, DateTime start,
                              DateTime deadline)
     {
-        var task = new Tasks() {
+
+            var task = new Tasks() {
             Title            = title,
             Requirements     = reqs,
             BeginDateTime    = start,
@@ -128,34 +116,38 @@ public class TriforceController : ApiController {
     }
 
     [HttpGet]
-    public object DeleteTask(int taskID) {
+    public object DeleteTask(int taskID)
+    {
         var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
 
         db.Tasks.Remove(task);
+        db.SaveChanges();
 
         return Json("ok");
     }
 
     [HttpGet]
-    public object ClaimTask(int taskID, int userID) {
+    public object ClaimTask(int taskID, int userID)
+    {
         var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
         var user = (from u in db.Users where u.UserId == userID select u).Single();
 
         task.Users.Add(user);
         db.SaveChanges();
 
-        return Json("ok");
+        return Json(user);
     }
 
     [HttpGet]
-    public object ReleaseTask(int taskID, int userID) {
+    public object ReleaseTask(int taskID, int userID)
+    {
         var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
         var user = (from u in db.Users where u.UserId == userID select u).Single();
 
         task.Users.Remove(user);
         db.SaveChanges();
 
-        return Json("ok");
+        return Json(user);
     }
 }
 

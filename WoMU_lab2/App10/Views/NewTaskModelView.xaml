@@ -26,8 +26,17 @@
                      FontSize="20"/>
             <TextBox Text="{Binding OneTaskModel.Requirements, Mode=TwoWay}"
                      PlaceholderText="requirements"
+                     Margin="0,05"
                      FontSize="20" />
-            
+            <TextBlock Text="Starting Date" Margin="0,05"/>    
+            <DatePicker Date="{Binding OneTaskModel.BeginDateTime, Mode=TwoWay}"
+                     Margin="0,05"
+                     FontSize="20" />
+            <TextBlock Text="Deadline" Margin="0,05"/>    
+            <DatePicker Date="{Binding OneTaskModel.DeadlineDateTime, Mode=TwoWay}"
+                     Margin="0,05"
+                     FontSize="20" />
+
             <Button Content="Add new Task"
                     Width="200"
                     HorizontalAlignment="Right"
