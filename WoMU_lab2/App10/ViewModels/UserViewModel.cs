@@ -64,7 +64,7 @@ namespace App10.ViewModels
 
             AllUserModels = await userModelServices.GetUserModelsAsync();
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

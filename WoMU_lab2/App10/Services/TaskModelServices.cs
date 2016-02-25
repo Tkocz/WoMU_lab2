@@ -45,7 +45,7 @@ namespace App10.Services
 
             var result = await httpClient.GetAsync(WebServiceUrl + "createtask?"
                 +"title=" + taskModel.Title + "&reqs=" +taskModel.Requirements
-                +"&start=" + taskModel.BeginDateTime +"&deadline=" +taskModel.DeadlineDateTime);
+                +"&start=" + taskModel.BeginDateTime.ToString() +"&deadline=" +taskModel.DeadlineDateTime.ToString());
 
             return result.IsSuccessStatusCode;
         }
@@ -74,11 +74,11 @@ namespace App10.Services
         //   *     B=id på den user som ska assignas till tasken
         //   *
 
-        public async Task<bool> ClaimTaskModelAsync(TaskModel taskModel)
+        public async Task<bool> ClaimTaskModelAsync(TaskModel taskModel, UserModel userModel)
         {
             var httpClient = new HttpClient();
 
-            var response = await httpClient.GetAsync(WebServiceUrl + "claimtask?" + "taskId=" + taskModel.Id + "&userId=" + "3"/*taskModel.Users*/);
+            var response = await httpClient.GetAsync(WebServiceUrl + "claimtask?" + "taskId=" + taskModel.Id + "&userId=" + userModel.Id);
 
             return response.IsSuccessStatusCode;
         }

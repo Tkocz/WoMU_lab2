@@ -23,21 +23,9 @@ namespace App10.Views
             this.InitializeComponent();
         }
 
-        private void ShowHideSplitViewPane_OnClick(object sender, RoutedEventArgs e)
+        private void GoToDetailsPage_OnClick(object sender, RoutedEventArgs e)
         {
-
-            TasksSplitView.IsPaneOpen = !TasksSplitView.IsPaneOpen;
-        }
-
-        private void GoToAddNewTaskPage_OnClick(object sender, RoutedEventArgs e)
-        {
-
-            Frame.Navigate(typeof(NewTaskModelView));
-        }
-
-        private async void OpenWebsite_OnClick(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("http://localhost:16579"));
+            this.Frame.Navigate(typeof(DetailsModelView));
         }
     }
 }

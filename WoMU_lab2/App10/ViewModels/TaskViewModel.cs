@@ -52,27 +52,6 @@ namespace App10.ViewModels
             }
         }
 
-        public ICommand AddTaskModelCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await AddTaskModelAsync();
-                });
-            }
-        }
-
-        public ICommand DeleteTaskModelCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await DeleteTaskModelAsync();
-                });
-            }
-        }
         public ICommand ClaimTaskModelCommand
         {
             get
@@ -83,6 +62,7 @@ namespace App10.ViewModels
                 });
             }
         }
+
         public ICommand ReleaseTaskModelCommand
         {
             get
@@ -106,26 +86,11 @@ namespace App10.ViewModels
             AllTaskModels = await taskModelServices.GetTaskModelsAsync();
         }
 
-        private async Task<bool> AddTaskModelAsync()
-        {
-            var taskModelServices = new TaskModelServices();
-
-            var isTaskModelAdded = await taskModelServices.AddTaskModelAsync(_oneTaskModel);
-
-            return isTaskModelAdded;
-        }
-
-        private async Task DeleteTaskModelAsync()
-        {
-            var taskModelServices = new TaskModelServices();
-
-            await taskModelServices.DeleteTaskModelAsync(_oneTaskModel);
-        }
         private async Task ClaimTaskModelAsync()
         {
             var taskModelServices = new TaskModelServices();
 
-            await taskModelServices.ClaimTaskModelAsync(_oneTaskModel);
+            await taskModelServices.ClaimTaskModelAsync(_oneTaskModel, _oneUserModel);
         }
         private async Task ReleaseTaskModelAsync()
         {
@@ -141,6 +106,58 @@ namespace App10.ViewModels
             {
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        private List<UserModel> _allUserModels;
+        private UserModel _oneUserModel = new UserModel();
+
+        public List<UserModel> AllUserModels
+        {
+            get
+            {
+                return _allUserModels;
+            }
+            set
+            {
+                _allUserModels = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public UserModel OneUserModel
+        {
+            get
+            {
+                return _oneUserModel;
+            }
+            set
+            {
+                _oneUserModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand GetUserModelCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await DownloadUserModelsAsync();
+                });
+            }
+        }
+
+        //public UsersViewModel()
+        //{
+
+        //    DownloadUserModelsAsync();
+        //}
+
+        private async Task DownloadUserModelsAsync()
+        {
+            var userModelServices = new UserModelServices();
+
+            AllUserModels = await userModelServices.GetUserModelsAsync();
         }
     }
 }

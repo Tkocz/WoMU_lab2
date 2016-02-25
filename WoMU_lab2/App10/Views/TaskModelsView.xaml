@@ -16,67 +16,42 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <SplitView x:Name="TasksSplitView"
-                   DisplayMode="CompactInline">
-            <SplitView.Pane>
-                <StackPanel>
-                    <AppBarButton Icon="List"
-                                  Width="50"
-                                  Click="ShowHideSplitViewPane_OnClick" />
+        <StackPanel>
 
-                    <StackPanel Margin="60,40,20,20">
+            <StackPanel Margin="20,10,20,10" Orientation="Horizontal">
 
-                        <Button Content="Get Tasks"
+                        <Button Content="Update"
                                 Background="BlueViolet"
                                 Foreground="White"
-                                Width="200"
-                                FontSize="18"
-                                Margin="0,10"
+                                Width="70"
+                                FontSize="12"
+                                Margin="5"
                                 Command="{Binding GetTaskModelCommand}" />
 
-                        <Button Content="Add new Task"
-                                Width="200"
-                                FontSize="18"
-                                Background="CornflowerBlue"
-                                Foreground="White"
-                                Margin="0,10"
-                                Click="GoToAddNewTaskPage_OnClick" />
-                        
-                        <Button Content="Claim Task"
-                                Background="BlueViolet"
-                                FontSize="18"
-                                Foreground="White"
-                                Width="200"
-                                Margin="0,10"
-                                Command="{Binding ClaimTaskModelCommand}" />
-                        
-                        <Button Content="Release Task"
+                        <Button Content="Claim"
                                 Background="LimeGreen"
-                                FontSize="18"
+                                FontSize="12"
                                 Foreground="White"
-                                Width="200"
-                                Margin="0,10"
-                                Command="{Binding ReleaseTaskModelCommand}" />
-                        
-                        <Button Content="Remove Task"
+                                Width="70"
+                                Margin="5"
+                                Command="{Binding ClaimTaskModelCommand}" />
+
+                        <Button Content="Release"
                                 Background="Crimson"
-                                FontSize="18"
+                                FontSize="12"
                                 Foreground="White"
-                                Width="200"
-                                Margin="0,10"
-                                Command="{Binding DeleteTaskModelCommand}" />
+                                Width="70"
+                                Margin="5"
+                                Command="{Binding ReleaseTaskModelCommand}" />
 
-                        <Button Content="Open website"
-                                Background="Goldenrod"
-                                FontSize="18"
+                <Button Content="Details"
+                                Background="Crimson"
+                                FontSize="12"
                                 Foreground="White"
-                                Width="200"
-                                Margin="0,10"
-                                Click="OpenWebsite_OnClick" />
-
-                    </StackPanel>
-                </StackPanel>
-            </SplitView.Pane>
+                                Width="70"
+                                Margin="5"
+                                Click="GoToDetailsPage_OnClick" />
+            </StackPanel>
             <Grid>
                 <Image Source="../Assets/Images/triforce_bg2.png"/>
                 <ListView ItemsSource="{Binding AllTaskModels}"
@@ -86,37 +61,26 @@
                             <StackPanel Orientation="Vertical"
                                         Margin="0,5,0,5"
                                         Padding="10"
-                                        Background="#cc008080">
+                                        Background="#cc008080"
+                                        Width="{Binding OneTaskModel.DeadlineDateTime}">
 
                                 <TextBlock Text="{Binding Title}"
                                            FontWeight="Bold"
                                            Foreground="White"
                                            FontSize="18" />
 
-                                <TextBlock Text="{Binding Requirements}"
+                                <TextBlock Text="{Binding Users.Count}"
                                            Opacity="0.6"
                                            TextWrapping="Wrap"
                                            Foreground="White"
                                            Margin="10,10,0,0" />
 
-                                <TextBlock Text="{Binding BeginDateTime, Converter={StaticResource DateTimeToElapsedHoursConverter}, Mode=OneWay}"
-                                           Opacity="0.6"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"
-                                           Foreground="White"
-                                           Margin="0,10,0,0" />
-                                
-                                <TextBlock Text="{Binding DeadlineDateTime, Converter={StaticResource DateTimeToElapsedHoursConverter}, Mode=OneWay}"
-                                           Opacity="0.6"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"
-                                           Foreground="White"
-                                           Margin="0,10,0,0" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-        </SplitView>
+        </StackPanel>
+            
     </Grid>
 </Page>

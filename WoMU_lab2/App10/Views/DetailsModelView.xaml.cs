@@ -12,24 +12,19 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using App10.ViewModels;
 
 namespace App10.Views
 {
-    public sealed partial class NewTaskModelView : Page
+    public sealed partial class DetailsModelView : Page
     {
-        public NewTaskModelView()
+        public DetailsModelView()
         {
             this.InitializeComponent();
         }
-
         private void GoToPreviousPage_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.GoBack();
-        }
-
-        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
-        {
-            
         }
     }
 }

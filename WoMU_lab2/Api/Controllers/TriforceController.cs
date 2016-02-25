@@ -130,7 +130,7 @@ public class TriforceController : ApiController {
         task.Users.Add(user);
         db.SaveChanges();
 
-        return Json("ok");
+        return Json(task);
     }
 
     [HttpGet]
@@ -142,7 +142,7 @@ public class TriforceController : ApiController {
         task.Users.Remove(user);
         db.SaveChanges();
 
-        return Json("ok");
+        return Json(task);
     }
     [HttpGet]
     public object EditTask(int taskID, string title, string reqs, DateTime start,

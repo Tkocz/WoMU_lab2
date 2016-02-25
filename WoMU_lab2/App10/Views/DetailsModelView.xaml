@@ -3,22 +3,38 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:ViewModels="using:App10.ViewModels"
-      x:Class="App10.Views.UserModelsView"
+      x:Class="App10.Views.DetailsModelView"
       mc:Ignorable="d">
-    
-    <Page.DataContext>
-        <ViewModels:UsersViewModel />
-    </Page.DataContext>
 
+    <Page.DataContext>
+        <ViewModels:TasksViewModel />
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Image Source="../Assets/Images/triforce_bg2.png"/>
         <StackPanel Orientation="Vertical"
                     Margin="20">
 
-            <TextBlock Text="Select User"/>
-            <ListView ItemsSource="{Binding AllUserModels}"
-                          SelectedItem="{Binding OneUserModel, Mode=TwoWay}" SelectionChanged="ListView_SelectionChanged">
+            <AppBarButton Icon="Back"
+                          Click="GoToPreviousPage_OnClick"/>
+
+            <TextBlock Text="TaskDetails"/>
+
+            <TextBlock Text="{Binding OneTaskModel.Title}"
+                     Margin="0,20"
+                     FontSize="20"/>
+            <TextBlock Text="{Binding OneTaskModel.Requirements}"
+                     Margin="0,05"
+                     FontSize="20" />
+            <TextBlock Text="Startdate" Margin="0,05"/>
+            <TextBlock Text="{Binding OneTaskModel.BeginDateTime}" Margin="0,05"/>
+
+            <TextBlock Text="Deadline" Margin="0,05"/>
+            <TextBlock Text="{Binding OneTaskModel.DeadlineDateTime}" Margin="0,05"/>
+
+            <TextBlock Text="Claimed By User" Margin="0,05"/>
+            <ListView ItemsSource="{Binding OneTaskModels}"
+                          SelectedItem="{Binding OneTaskModel.Users}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical"
@@ -26,11 +42,10 @@
                                         Padding="10"
                                         Background="#cc008080">
 
-                            <TextBlock Text="{Binding FirstName}"
+                            <TextBlock Text="{Binding OneTaskModel.Users}"
                                            FontWeight="Bold"
                                            Foreground="White"
                                            FontSize="18" />
-
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using App10.Models;
 
 namespace App10.Views
 {
@@ -22,16 +23,10 @@ namespace App10.Views
         {
             this.InitializeComponent();
         }
-
-        private void GoToAddNewTaskPage_OnClick(object sender, RoutedEventArgs e)
-        {
-
-            Frame.Navigate(typeof(NewTaskModelView));
-        }
-
+        
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(TaskModelsView), e);
         }
     }
 }

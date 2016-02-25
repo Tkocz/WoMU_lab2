@@ -104,17 +104,17 @@
     <Compile Include="Services\UserModelServices.cs" />
     <Compile Include="Services\TaskModelServices.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="ViewModels\TaskViewModel.cs" />
-    <Compile Include="Views\UserModelView.xaml.cs">
-      <DependentUpon>UserModelView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NewTaskModelView.xaml.cs">
-      <DependentUpon>NewTaskModelView.xaml</DependentUpon>
+    <Compile Include="Views\DetailsModelView.xaml.cs">
+      <DependentUpon>DetailsModelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TaskModelsView.xaml.cs">
       <DependentUpon>TaskModelsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserModelView.xaml.cs">
+      <DependentUpon>UserModelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -143,15 +143,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\UserModelView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\DetailsModelView.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\NewTaskModelView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TaskModelsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserModelView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
