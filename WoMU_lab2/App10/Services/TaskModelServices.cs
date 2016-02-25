@@ -45,7 +45,7 @@ namespace App10.Services
 
             var result = await httpClient.GetAsync(WebServiceUrl + "createtask?"
                 +"title=" + taskModel.Title + "&reqs=" +taskModel.Requirements
-                +"&start=2015-11-12" /*+ taskModel.BeginDateTime*/ +"&deadline=2016-03-23"/* +taskModel.DeadlineDateTime*/);
+                +"&start=" + taskModel.BeginDateTime +"&deadline=" +taskModel.DeadlineDateTime);
 
             return result.IsSuccessStatusCode;
         }
@@ -61,6 +61,42 @@ namespace App10.Services
             var httpClient = new HttpClient();
 
             var response = await httpClient.GetAsync(WebServiceUrl + "deletetask?" +"taskId=" + taskModel.Id);
+
+            return response.IsSuccessStatusCode;
+        }
+        //   * /api/claimtask? taskID = A & userID = B
+        //   *
+        //   * Assignar en user till en task.
+        //   *
+        //   * Parametrar:
+        //   *   
+        //   *     A=id på en task
+        //   *     B=id på den user som ska assignas till tasken
+        //   *
+
+        public async Task<bool> ClaimTaskModelAsync(TaskModel taskModel)
+        {
+            var httpClient = new HttpClient();
+
+            var response = await httpClient.GetAsync(WebServiceUrl + "claimtask?" + "taskId=" + taskModel.Id + "&userId=" + "3"/*taskModel.Users*/);
+
+            return response.IsSuccessStatusCode;
+        }
+      
+      //   * /api/releasetask? taskID = A & userID = B
+      //   *
+      //   * Tar bort en user från en task.
+      //   *   
+      //   *   Parametrar:
+      //   *   
+      //   *     A= id på en task
+      //   * B = id på den user som ska tas bort från tasken
+      //   *
+        public async Task<bool> ReleaseTaskModelAsync(TaskModel taskModel)
+        {
+            var httpClient = new HttpClient();
+
+            var response = await httpClient.GetAsync(WebServiceUrl + "releasetask?" + "taskId=" + taskModel.Id + "&userId=" + "1"/*taskModel.Users*/);
 
             return response.IsSuccessStatusCode;
         }

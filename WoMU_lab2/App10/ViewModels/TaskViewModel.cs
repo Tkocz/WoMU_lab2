@@ -73,7 +73,26 @@ namespace App10.ViewModels
                 });
             }
         }
-
+        public ICommand ClaimTaskModelCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await ClaimTaskModelAsync();
+                });
+            }
+        }
+        public ICommand ReleaseTaskModelCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await ReleaseTaskModelAsync();
+                });
+            }
+        }
         public TasksViewModel()
         {
 
@@ -102,7 +121,18 @@ namespace App10.ViewModels
 
             await taskModelServices.DeleteTaskModelAsync(_oneTaskModel);
         }
+        private async Task ClaimTaskModelAsync()
+        {
+            var taskModelServices = new TaskModelServices();
 
+            await taskModelServices.ClaimTaskModelAsync(_oneTaskModel);
+        }
+        private async Task ReleaseTaskModelAsync()
+        {
+            var taskModelServices = new TaskModelServices();
+
+            await taskModelServices.ReleaseTaskModelAsync(_oneTaskModel);
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

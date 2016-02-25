@@ -100,9 +100,15 @@
     </Compile>
     <Compile Include="Converters\DateTimeToElapsedHoursConverter.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Services\UserModelServices.cs" />
     <Compile Include="Services\TaskModelServices.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
+    <Compile Include="Views\UserModelView.xaml.cs">
+      <DependentUpon>UserModelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewTaskModelView.xaml.cs">
       <DependentUpon>NewTaskModelView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\UserModelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewTaskModelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

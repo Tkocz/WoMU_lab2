@@ -1,0 +1,40 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:ViewModels="using:App10.ViewModels"
+      x:Class="App10.Views.UserModelsView"
+      mc:Ignorable="d">
+    
+    <Page.DataContext>
+        <ViewModels:UsersViewModel />
+    </Page.DataContext>
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image Source="../Assets/Images/triforce_bg2.png"/>
+        <StackPanel Orientation="Vertical"
+                    Margin="20">
+
+            <TextBlock Text="Select User"/>
+            <ListView ItemsSource="{Binding AllUserModels}"
+                          SelectedItem="{Binding OneUserModel, Mode=TwoWay}" SelectionChanged="ListView_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical"
+                                        Margin="0,5,0,5"
+                                        Padding="10"
+                                        Background="#cc008080">
+
+                            <TextBlock Text="{Binding Title}"
+                                           FontWeight="Bold"
+                                           Foreground="White"
+                                           FontSize="18" />
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

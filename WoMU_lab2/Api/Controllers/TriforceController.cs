@@ -7,11 +7,6 @@ using Api.Models;
 
 namespace Api.Controllers
 {
-
-    // These POD-classes are needed because C# sucks Satan's ass.
-
-
-
     /*
      * API-spec:
      * 
@@ -112,7 +107,7 @@ public class TriforceController : ApiController {
         db.Tasks.Add(task);
         db.SaveChanges();
 
-        return Json(task.TaskId.ToString());
+        return Json(task);
     }
 
     [HttpGet]
@@ -123,7 +118,7 @@ public class TriforceController : ApiController {
         db.Tasks.Remove(task);
         db.SaveChanges();
 
-        return Json("ok");
+        return Json(task);
     }
 
     [HttpGet]
@@ -135,7 +130,7 @@ public class TriforceController : ApiController {
         task.Users.Add(user);
         db.SaveChanges();
 
-        return Json(user);
+        return Json("ok");
     }
 
     [HttpGet]
@@ -147,8 +142,23 @@ public class TriforceController : ApiController {
         task.Users.Remove(user);
         db.SaveChanges();
 
-        return Json(user);
+        return Json("ok");
     }
-}
+    [HttpGet]
+    public object EditTask(int taskID, string title, string reqs, DateTime start,
+                        DateTime deadline)
+    {
+        var task = (from t in db.Tasks where t.TaskId == taskID select t).Single();
+
+        task.Title = title;
+        task.Requirements = reqs;
+        task.BeginDateTime = start;
+        task.DeadlineDateTime = deadline;
+
+        db.SaveChanges();
+
+        return Json("ok");
+    }
+    }
 
 }

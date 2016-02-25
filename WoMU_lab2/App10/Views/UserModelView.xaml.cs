@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,21 +16,22 @@ using Windows.UI.Xaml.Navigation;
 
 namespace App10.Views
 {
-    public sealed partial class NewTaskModelView : Page
+    public sealed partial class UserModelsView : Page
     {
-        public NewTaskModelView()
+        public UserModelsView()
         {
             this.InitializeComponent();
         }
 
-        private void GoToPreviousPage_OnClick(object sender, RoutedEventArgs e)
+        private void GoToAddNewTaskPage_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.GoBack();
+
+            Frame.Navigate(typeof(NewTaskModelView));
         }
 
-        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
     }
 }
