@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App10.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,15 @@ namespace App10.Views
         private void GoToDetailsPage_OnClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(DetailsModelView));
+        }
+        public int TimeSpanCalculator(TaskModel task)
+        {
+            int startTimeInt;
+            int endTimeInt;
+            int.TryParse((task.BeginDateTime.ToString("yyyymmddhh")), out startTimeInt);
+            int.TryParse((task.DeadlineDateTime.ToString("yyyymmddhh")), out endTimeInt);
+
+            return endTimeInt - startTimeInt;
         }
     }
 }

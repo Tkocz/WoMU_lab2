@@ -13,7 +13,7 @@ namespace App10.ViewModels
     {
 
         private List<UserModel> _allUserModels;
-        private UserModel _oneUserModel = new UserModel();
+        public UserModel _oneUserModel = new UserModel();
 
         public List<UserModel> AllUserModels
         {

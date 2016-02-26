@@ -99,6 +99,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DateTimeToElapsedHoursConverter.cs" />
+    <Compile Include="Converters\TaskToDurationConverter.cs" />
+    <Compile Include="Converters\UserIdToColorConverter.cs" />
+    <Compile Include="Converters\TimeToIntConverter.cs" />
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\UserModelServices.cs" />

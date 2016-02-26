@@ -92,11 +92,11 @@ namespace App10.Services
       //   *     A= id på en task
       //   * B = id på den user som ska tas bort från tasken
       //   *
-        public async Task<bool> ReleaseTaskModelAsync(TaskModel taskModel)
+        public async Task<bool> ReleaseTaskModelAsync(TaskModel taskModel, UserModel userModel)
         {
             var httpClient = new HttpClient();
 
-            var response = await httpClient.GetAsync(WebServiceUrl + "releasetask?" + "taskId=" + taskModel.Id + "&userId=" + "1"/*taskModel.Users*/);
+            var response = await httpClient.GetAsync(WebServiceUrl + "releasetask?" + "taskId=" + taskModel.Id + "&userId=" +userModel.Id);
 
             return response.IsSuccessStatusCode;
         }

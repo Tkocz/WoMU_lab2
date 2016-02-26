@@ -11,7 +11,6 @@ namespace App10.Models
         public DateTime BeginDateTime { get; set; }
         public DateTime DeadlineDateTime { get; set; }
         public IEnumerable<UserModel> Users { get; set; }
-
     }
 }
 

@@ -14,6 +14,7 @@ namespace App10.ViewModels
 
         private List<TaskModel> _allTaskModels;
         private TaskModel _oneTaskModel = new TaskModel();
+        private UserModel _oneUserModel = new UserModel();
 
         public List<TaskModel> AllTaskModels
         {
@@ -96,7 +97,7 @@ namespace App10.ViewModels
         {
             var taskModelServices = new TaskModelServices();
 
-            await taskModelServices.ReleaseTaskModelAsync(_oneTaskModel);
+            await taskModelServices.ReleaseTaskModelAsync(_oneTaskModel, _oneUserModel);
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -106,58 +107,6 @@ namespace App10.ViewModels
             {
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-        private List<UserModel> _allUserModels;
-        private UserModel _oneUserModel = new UserModel();
-
-        public List<UserModel> AllUserModels
-        {
-            get
-            {
-                return _allUserModels;
-            }
-            set
-            {
-                _allUserModels = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public UserModel OneUserModel
-        {
-            get
-            {
-                return _oneUserModel;
-            }
-            set
-            {
-                _oneUserModel = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand GetUserModelCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await DownloadUserModelsAsync();
-                });
-            }
-        }
-
-        //public UsersViewModel()
-        //{
-
-        //    DownloadUserModelsAsync();
-        //}
-
-        private async Task DownloadUserModelsAsync()
-        {
-            var userModelServices = new UserModelServices();
-
-            AllUserModels = await userModelServices.GetUserModelsAsync();
         }
     }
 }

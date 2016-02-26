@@ -8,7 +8,9 @@
       mc:Ignorable="d">
 
     <Page.Resources>
-        <Converters:DateTimeToElapsedHoursConverter x:Key="DateTimeToElapsedHoursConverter" />
+        <Converters:TimeToIntConverter x:Key="TimeToIntConverter" />
+        <Converters:TaskToDurationConverter x:Key="TaskToDurationConverter" />
+        <Converters:UserIdToColorConverter x:Key="UserIdToColorConverter"/>
     </Page.Resources>
 
     <Page.DataContext>
@@ -55,25 +57,25 @@
             <Grid>
                 <Image Source="../Assets/Images/triforce_bg2.png"/>
                 <ListView ItemsSource="{Binding AllTaskModels}"
-                          SelectedItem="{Binding OneTaskModel, Mode=TwoWay}">
+                          SelectedItem="{Binding OneTaskModel, Mode=TwoWay}"
+                          ScrollViewer.HorizontalScrollMode="Auto"
+                          ScrollViewer.VerticalScrollMode="Auto"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical"
-                                        Margin="0,5,0,5"
-                                        Padding="10"
-                                        Background="#cc008080"
-                                        Width="{Binding OneTaskModel.DeadlineDateTime}">
 
-                                <TextBlock Text="{Binding Title}"
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Name="taskPanel"
+                                        Padding="10"
+                                        Background="CadetBlue"
+                                        Margin="{Binding Converter={StaticResource TimeToIntConverter}, Mode=OneWay}"
+                                        Width="{Binding Converter={StaticResource TaskToDurationConverter}, Mode=OneWay}">
+
+
+                                <TextBlock Text="{Binding Title}" Name="tasken"
                                            FontWeight="Bold"
                                            Foreground="White"
                                            FontSize="18" />
-
-                                <TextBlock Text="{Binding Users.Count}"
-                                           Opacity="0.6"
-                                           TextWrapping="Wrap"
-                                           Foreground="White"
-                                           Margin="10,10,0,0" />
 
                             </StackPanel>
                         </DataTemplate>
