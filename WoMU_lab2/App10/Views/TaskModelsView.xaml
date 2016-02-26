@@ -71,7 +71,8 @@
                                 <TextBlock Text="{Binding Users.Count}"
                                            FontWeight="Bold"
                                            Foreground="White"
-                                           FontSize="18" />
+                                           FontSize="18" 
+                                           Loaded="TextBlock_Loaded" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

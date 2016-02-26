@@ -92,11 +92,15 @@ namespace App10.ViewModels
         {
             var taskModelServices = new TaskModelServices();
 
+            if (_oneTaskModel == null) return;
+
             await taskModelServices.ClaimTaskModelAsync(_oneTaskModel);
         }
         private async Task ReleaseTaskModelAsync()
         {
             var taskModelServices = new TaskModelServices();
+
+            if (_oneTaskModel == null) return;
 
             await taskModelServices.ReleaseTaskModelAsync(_oneTaskModel);
         }

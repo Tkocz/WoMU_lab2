@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using App10.Models;
+using Windows.UI;
 
 namespace App10.Views
 {
@@ -31,6 +32,28 @@ namespace App10.Views
             App thisApp = Application.Current as App;
             thisApp.currentTask = (TaskModel)listView.SelectedItems[0];
             this.Frame.Navigate(typeof(DetailsModelView));
+        }
+
+        private void TextBlock_Loaded(object sender, RoutedEventArgs e) {
+
+            if (sender == null) return;
+
+            var temp = (TextBlock)sender;
+
+            System.Diagnostics.Debug.WriteLine("Count: " + temp.Text);
+
+            if (temp.Text == "") return;
+
+            var count = Int32.Parse(temp.Text);
+            temp.Text = "";
+            for(int i = 0; i < count; i++) {
+                temp.Text += "●";
+            }
+            if(count == 1)
+                temp.Foreground = new SolidColorBrush(Colors.LimeGreen);
+            else
+                temp.Foreground = new SolidColorBrush(Colors.Red);
+            System.Diagnostics.Debug.WriteLine("Resultat: " + temp.Text);
         }
     }
 }
