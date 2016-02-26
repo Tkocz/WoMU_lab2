@@ -20,17 +20,9 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
 
-            <StackPanel Margin="20,10,20,10" Orientation="Horizontal">
+            <StackPanel Margin="20,10,30,10" Orientation="Horizontal" HorizontalAlignment="Center">
 
-                        <Button Content="Update"
-                                Background="BlueViolet"
-                                Foreground="White"
-                                Width="70"
-                                FontSize="12"
-                                Margin="5"
-                                Command="{Binding GetTaskModelCommand}" />
-
-                        <Button Content="Claim"
+                <Button Content="Claim"
                                 Background="LimeGreen"
                                 FontSize="12"
                                 Foreground="White"
@@ -64,7 +56,6 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
-
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" Name="taskPanel"
                                         Padding="10"
@@ -77,7 +68,10 @@
                                            FontWeight="Bold"
                                            Foreground="White"
                                            FontSize="18" />
-
+                                <TextBlock Text="{Binding Users.Count}"
+                                           FontWeight="Bold"
+                                           Foreground="White"
+                                           FontSize="18" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

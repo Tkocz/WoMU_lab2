@@ -27,7 +27,7 @@ namespace App10.Views
 
         private void GoToDetailsPage_OnClick(object sender, RoutedEventArgs e)
         {
-
+            if (sender == null) return;
             App thisApp = Application.Current as App;
             thisApp.currentTask = (TaskModel)listView.SelectedItems[0];
             this.Frame.Navigate(typeof(DetailsModelView));

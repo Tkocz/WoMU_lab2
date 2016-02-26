@@ -59,6 +59,7 @@ namespace App10.ViewModels
                 return new RelayCommand(async () =>
                 {
                     await ClaimTaskModelAsync();
+                    await DownloadTaskModelsAsync();
                 });
             }
         }
@@ -70,6 +71,7 @@ namespace App10.ViewModels
                 return new RelayCommand(async () =>
                 {
                     await ReleaseTaskModelAsync();
+                    await DownloadTaskModelsAsync();
                 });
             }
         }
