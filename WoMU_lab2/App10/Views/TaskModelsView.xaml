@@ -57,6 +57,7 @@
             <Grid>
                 <Image Source="../Assets/Images/triforce_bg2.png"/>
                 <ListView ItemsSource="{Binding AllTaskModels}"
+                          Name="listView"
                           SelectedItem="{Binding OneTaskModel, Mode=TwoWay}"
                           ScrollViewer.HorizontalScrollMode="Auto"
                           ScrollViewer.VerticalScrollMode="Auto"

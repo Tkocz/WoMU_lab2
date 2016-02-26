@@ -4,12 +4,13 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using App10.Models;
+using Windows.UI.Xaml;
 
 namespace App10.Services
 {
     public class TaskModelServices
     {
-
+        App thisApp = Application.Current as App;
         private const string WebServiceUrl = "http://localhost:16579/api/triforce/";
 
         public async Task<List<TaskModel>> GetTaskModelsAsync()
@@ -74,11 +75,11 @@ namespace App10.Services
         //   *     B=id på den user som ska assignas till tasken
         //   *
 
-        public async Task<bool> ClaimTaskModelAsync(TaskModel taskModel, UserModel userModel)
+        public async Task<bool> ClaimTaskModelAsync(TaskModel taskModel)
         {
             var httpClient = new HttpClient();
 
-            var response = await httpClient.GetAsync(WebServiceUrl + "claimtask?" + "taskId=" + taskModel.Id + "&userId=" + userModel.Id);
+            var response = await httpClient.GetAsync(WebServiceUrl + "claimtask?" + "taskId=" + taskModel.Id + "&userId=" + thisApp.currentUser.Id);
 
             return response.IsSuccessStatusCode;
         }
@@ -92,11 +93,11 @@ namespace App10.Services
       //   *     A= id på en task
       //   * B = id på den user som ska tas bort från tasken
       //   *
-        public async Task<bool> ReleaseTaskModelAsync(TaskModel taskModel, UserModel userModel)
+        public async Task<bool> ReleaseTaskModelAsync(TaskModel taskModel)
         {
             var httpClient = new HttpClient();
 
-            var response = await httpClient.GetAsync(WebServiceUrl + "releasetask?" + "taskId=" + taskModel.Id + "&userId=" +userModel.Id);
+            var response = await httpClient.GetAsync(WebServiceUrl + "releasetask?" + "taskId=" + taskModel.Id + "&userId=" +thisApp.currentUser.Id);
 
             return response.IsSuccessStatusCode;
         }

@@ -14,7 +14,6 @@ namespace App10.ViewModels
 
         private List<TaskModel> _allTaskModels;
         private TaskModel _oneTaskModel = new TaskModel();
-        private UserModel _oneUserModel = new UserModel();
 
         public List<TaskModel> AllTaskModels
         {
@@ -91,13 +90,13 @@ namespace App10.ViewModels
         {
             var taskModelServices = new TaskModelServices();
 
-            await taskModelServices.ClaimTaskModelAsync(_oneTaskModel, _oneUserModel);
+            await taskModelServices.ClaimTaskModelAsync(_oneTaskModel);
         }
         private async Task ReleaseTaskModelAsync()
         {
             var taskModelServices = new TaskModelServices();
 
-            await taskModelServices.ReleaseTaskModelAsync(_oneTaskModel, _oneUserModel);
+            await taskModelServices.ReleaseTaskModelAsync(_oneTaskModel);
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

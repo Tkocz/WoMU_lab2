@@ -26,6 +26,8 @@ namespace App10.Views
         
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            App thisApp = Application.Current as App;
+            thisApp.currentUser = (UserModel)userList.SelectedItem;
             this.Frame.Navigate(typeof(TaskModelsView), e);
         }
     }

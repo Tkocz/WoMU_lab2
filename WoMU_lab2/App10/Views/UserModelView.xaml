@@ -18,6 +18,7 @@
 
             <TextBlock Text="Select User"/>
             <ListView ItemsSource="{Binding AllUserModels}"
+                      Name="userList"
                           SelectedItem="{Binding OneUserModel, Mode=TwoWay}" SelectionChanged="ListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
