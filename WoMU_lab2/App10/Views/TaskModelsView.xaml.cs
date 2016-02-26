@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using App10.Models;
 
 namespace App10.Views
 {
@@ -26,16 +27,10 @@ namespace App10.Views
 
         private void GoToDetailsPage_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(DetailsModelView));
-        }
-        public int TimeSpanCalculator(TaskModel task)
-        {
-            int startTimeInt;
-            int endTimeInt;
-            int.TryParse((task.BeginDateTime.ToString("yyyymmddhh")), out startTimeInt);
-            int.TryParse((task.DeadlineDateTime.ToString("yyyymmddhh")), out endTimeInt);
 
-            return endTimeInt - startTimeInt;
+            App thisApp = Application.Current as App;
+            thisApp.currentTask = (TaskModel)listView.SelectedItems[0];
+            this.Frame.Navigate(typeof(DetailsModelView));
         }
     }
 }

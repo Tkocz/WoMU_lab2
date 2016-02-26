@@ -6,10 +6,6 @@
       x:Class="App10.Views.DetailsModelView"
       mc:Ignorable="d">
 
-    <Page.DataContext>
-        <ViewModels:TasksViewModel />
-    </Page.DataContext>
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Image Source="../Assets/Images/triforce_bg2.png"/>
         <StackPanel Orientation="Vertical"
@@ -18,38 +14,21 @@
             <AppBarButton Icon="Back"
                           Click="GoToPreviousPage_OnClick"/>
 
-            <TextBlock Text="TaskDetails"/>
+            <TextBlock Name="titleBlock" 
+                       Text="TaskDetails for "
+                       FontWeight="Bold"
+                       FontSize="25"/>
 
-            <TextBlock Text="{Binding OneTaskModel.Title}"
-                     Margin="0,20"
-                     FontSize="20"/>
-            <TextBlock Text="{Binding OneTaskModel.Requirements}"
+            <TextBlock Name="requirementsBlock" 
+                    Text="Requirements"
                      Margin="0,05"
-                     FontSize="20" />
-            <TextBlock Text="Startdate" Margin="0,05"/>
-            <TextBlock Text="{Binding OneTaskModel.BeginDateTime}" Margin="0,05"/>
+                     FontSize="15" />
+            
+            <TextBlock Name="startBlock" Text="Startdate: " Margin="0, 25, 0, 0"/>
 
-            <TextBlock Text="Deadline" Margin="0,05"/>
-            <TextBlock Text="{Binding OneTaskModel.DeadlineDateTime}" Margin="0,05"/>
+            <TextBlock Name="deadlineBlock" Text="Deadline: " Margin="0,05"/>
 
-            <TextBlock Text="Claimed By User" Margin="0,05"/>
-            <ListView ItemsSource="{Binding OneTaskModels}"
-                          SelectedItem="{Binding OneTaskModel.Users}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical"
-                                        Margin="0,5,0,5"
-                                        Padding="10"
-                                        Background="#cc008080">
-
-                            <TextBlock Text="{Binding OneTaskModel.Users}"
-                                           FontWeight="Bold"
-                                           Foreground="White"
-                                           FontSize="18" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <TextBlock Name="userBlock" Text="Claimed By User: " Margin="0, 25"/>
         </StackPanel>
     </Grid>
 </Page>

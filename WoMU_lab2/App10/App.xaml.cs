@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using App10.Views;
+using App10.Models;
 
 namespace App10
 {
@@ -13,6 +14,7 @@ namespace App10
     /// </summary>
     sealed partial class App : Application
     {
+        public TaskModel currentTask;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
