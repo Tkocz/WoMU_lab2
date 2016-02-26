@@ -9,12 +9,9 @@ namespace App10.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var task = (TaskModel)value;
-            int startTimeInt;
-            int endTimeInt;
-            int.TryParse((task.BeginDateTime.ToString("yyyymmdd")), out startTimeInt);
-            int.TryParse((task.DeadlineDateTime.ToString("yyyymmdd")), out endTimeInt);
+            double duration = (task.DeadlineDateTime - task.BeginDateTime).TotalDays;
 
-            return endTimeInt+1 - startTimeInt;
+            return duration*10;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

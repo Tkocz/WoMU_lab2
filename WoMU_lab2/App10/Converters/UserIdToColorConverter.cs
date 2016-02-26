@@ -10,12 +10,12 @@ namespace App10.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var id = (int)value;
+            var user = (UserModel)value;
 
-            switch (id) {
-                case 1: return "#FAAC58";
-                case 2: return "#F5A9F2";
-                case 3: return "#B40486";
+            switch (user.Id) {
+                case "1": return "#FAAC58";
+                case "2": return "#F5A9F2";
+                case "3": return "#B40486";
                 default:return "#000000";
             }
             

@@ -57,6 +57,7 @@
                           ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListView.ItemTemplate>
                         <DataTemplate>
+                                                           
                             <StackPanel Orientation="Vertical" Name="taskPanel"
                                         Padding="10"
                                         Background="CadetBlue"
@@ -67,6 +68,7 @@
                                 <TextBlock Text="{Binding Title}" Name="tasken"
                                            FontWeight="Bold"
                                            Foreground="White"
+                                           MinWidth="0"
                                            FontSize="18" />
                                 <TextBlock Text="{Binding Users.Count}"
                                            FontWeight="Bold"

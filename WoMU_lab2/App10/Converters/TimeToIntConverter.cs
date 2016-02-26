@@ -12,9 +12,9 @@ namespace App10.Converters
             var task = (TaskModel)value;
             int timeInt;
             int schemaStartDate;
-            timeInt = Int32.Parse((task.BeginDateTime.ToString("yyyyMMdd")));
-            schemaStartDate = Int32.Parse((System.DateTime.Today.ToString("yyyyMMdd")));
-            schemaStartDate -= 00000100; //One month ago
+            timeInt = Int32.Parse((task.BeginDateTime.ToString("yyMMdd")));
+            schemaStartDate = Int32.Parse((System.DateTime.Today.ToString("yyMMdd")));
+            schemaStartDate -= 000100; //One month ago
 
             System.Diagnostics.Debug.WriteLine(timeInt - schemaStartDate);
             return new Thickness(((double)timeInt - (double)schemaStartDate),0,0,0);
