@@ -28,10 +28,16 @@ namespace App10.Views
 
         private void GoToDetailsPage_OnClick(object sender, RoutedEventArgs e)
         {
-            if (sender == null) return;
-            App thisApp = Application.Current as App;
-            thisApp.currentTask = (TaskModel)listView.SelectedItems[0];
-            this.Frame.Navigate(typeof(DetailsModelView));
+            try {
+                if (sender == null) return;
+                App thisApp = Application.Current as App;
+                thisApp.currentTask = (TaskModel)listView.SelectedItems[0];
+                this.Frame.Navigate(typeof(DetailsModelView));
+            }
+            catch {
+                return;
+            }
+
         }
 
         private void TextBlock_Loaded(object sender, RoutedEventArgs e) {
@@ -40,7 +46,7 @@ namespace App10.Views
 
             var temp = (TextBlock)sender;
 
-            System.Diagnostics.Debug.WriteLine("Count: " + temp.Text);
+            //System.Diagnostics.Debug.WriteLine("Count: " + temp.Text);
 
             if (temp.Text == "") return;
 
@@ -53,7 +59,7 @@ namespace App10.Views
                 temp.Foreground = new SolidColorBrush(Colors.LimeGreen);
             else
                 temp.Foreground = new SolidColorBrush(Colors.Red);
-            System.Diagnostics.Debug.WriteLine("Resultat: " + temp.Text);
+            //System.Diagnostics.Debug.WriteLine("Resultat: " + temp.Text);
         }
     }
 }
