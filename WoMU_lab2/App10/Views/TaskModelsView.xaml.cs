@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using App10.Models;
 using Windows.UI;
+using App10.ViewModels;
 
 namespace App10.Views
 {
@@ -73,5 +74,6 @@ namespace App10.Views
                 temp.Foreground = new SolidColorBrush(Colors.Red);
             
         }
+        
     }
 }

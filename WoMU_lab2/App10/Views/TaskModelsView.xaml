@@ -8,9 +8,9 @@
       mc:Ignorable="d">
 
     <Page.Resources>
-        <Converters:TimeToIntConverter x:Key="TimeToIntConverter" />
+        <Converters:TimeToThicknessConverter x:Key="TimeToThicknessConverter" />
         <Converters:TaskToDurationConverter x:Key="TaskToDurationConverter" />
-        <Converters:UserIdToColorConverter x:Key="UserIdToColorConverter"/>
+        <Converters:IdToColorConverter x:Key="UIdToColorConverter"/>
     </Page.Resources>
 
     <Page.DataContext>
@@ -65,16 +65,18 @@
                                                            
                             <StackPanel Orientation="Vertical" Name="taskPanel"
                                         Padding="10"
-                                        Background="CadetBlue"
-                                        Margin="{Binding Converter={StaticResource TimeToIntConverter}, Mode=OneWay}"
-                                        Width="{Binding Converter={StaticResource TaskToDurationConverter}, Mode=OneWay}">
+                                        Background="{Binding Converter={StaticResource UIdToColorConverter}}"
+                                        Margin="{Binding Converter={StaticResource TimeToThicknessConverter}, Mode=OneWay}"
+                                        Width="{Binding Converter={StaticResource TaskToDurationConverter}, Mode=OneWay}"
+                                        MaxWidth="{Binding Converter={StaticResource TaskToDurationConverter}, Mode=OneWay}">
+                                        
 
-
-                                <TextBlock Text="{Binding Title}" Name="tasken"
+                                <TextBlock Text="{Binding Title}"
                                            FontWeight="Bold"
                                            Foreground="White"
-                                           MinWidth="0"
+                                           MinWidth="30"
                                            FontSize="18" />
+                                
                                 <TextBlock Text="{Binding}"                                          
                                            FontWeight="Bold"
                                            Foreground="White"
@@ -84,6 +86,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Line Stroke="Red" StrokeThickness="3" Opacity="50" X1="30" X2="30" Y1="0" Y2="500"/>
+                <Line Stroke="Black" StrokeThickness="1" Opacity="50" X1="100" X2="100" Y1="0" Y2="500"/>
             </Grid>
         </StackPanel>
             

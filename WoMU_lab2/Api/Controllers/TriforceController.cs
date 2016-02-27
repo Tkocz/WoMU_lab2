@@ -77,7 +77,6 @@ public class TriforceController : ApiController {
                                            LastName  = user.LastName
                                        }
                 };
-
         return Json(q.ToArray());
     }
 
