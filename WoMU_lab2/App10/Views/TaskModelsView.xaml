@@ -20,7 +20,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
 
-            <StackPanel Margin="20,10,30,10" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Margin="20,10,30,0" Orientation="Horizontal" HorizontalAlignment="Center">
 
                 <Button Content="Claim"
                                 Background="LimeGreen"
@@ -39,12 +39,17 @@
                                 Command="{Binding ReleaseTaskModelCommand}" />
 
                 <Button Content="Details"
-                                Background="Crimson"
+                                Background="Blue"
                                 FontSize="12"
                                 Foreground="White"
                                 Width="70"
                                 Margin="5"
                                 Click="GoToDetailsPage_OnClick" />
+            </StackPanel>
+            <StackPanel Margin="20,0,30,10" Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="The Task is only claimed by you." FontSize="12" Foreground="LimeGreen"></TextBlock>
+                <TextBlock Text="The Task is claimed by you and someone else." FontSize="12" Foreground="Orange"></TextBlock>
+                <TextBlock Text="The Task is already taken." FontSize="12" Foreground="Red"></TextBlock>
             </StackPanel>
             <Grid>
                 <Image Source="../Assets/Images/triforce_bg2.png"/>
@@ -70,7 +75,7 @@
                                            Foreground="White"
                                            MinWidth="0"
                                            FontSize="18" />
-                                <TextBlock Text="{Binding Users.Count}"
+                                <TextBlock Text="{Binding}"                                          
                                            FontWeight="Bold"
                                            Foreground="White"
                                            FontSize="18" 

@@ -44,22 +44,34 @@ namespace App10.Views
 
             if (sender == null) return;
 
+            App thisApp = Application.Current as App;
             var temp = (TextBlock)sender;
-
-            //System.Diagnostics.Debug.WriteLine("Count: " + temp.Text);
-
-            if (temp.Text == "") return;
-
-            var count = Int32.Parse(temp.Text);
+            var task = (TaskModel)temp.DataContext;
             temp.Text = "";
-            for(int i = 0; i < count; i++) {
+            Boolean currentUserAttached = false;
+            
+
+            //Om tasken har en user och det är nuvarande user.
+            if((int)task.Users.Count() == 1 && thisApp.currentUser.Id == task.Users.ElementAt(0).Id) {
+                temp.Text = "●";
+                temp.Foreground = new SolidColorBrush(Colors.LimeGreen);
+                return;
+            }
+
+            //Om det finns fler users.
+            for (int i = 0; i < (int)task.Users.Count(); i++) {
+                if (task.Users.ElementAt(i).Id == thisApp.currentUser.Id)
+                    currentUserAttached = true;
                 temp.Text += "●";
             }
-            if(count == 1)
-                temp.Foreground = new SolidColorBrush(Colors.LimeGreen);
+
+            //Om tasken har flera user och en av dom är nuvarande user.
+            if(currentUserAttached)
+                temp.Foreground = new SolidColorBrush(Colors.Orange);
+            //Om tasken är tagen av en annan eller flera users.
             else
                 temp.Foreground = new SolidColorBrush(Colors.Red);
-            //System.Diagnostics.Debug.WriteLine("Resultat: " + temp.Text);
+            
         }
     }
 }
