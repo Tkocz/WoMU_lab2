@@ -64,7 +64,7 @@
                         <DataTemplate>
                                                            
                             <StackPanel Orientation="Vertical" Name="taskPanel"
-                                        Padding="10"
+                                        Padding="2"
                                         Background="{Binding Converter={StaticResource UIdToColorConverter}}"
                                         Margin="{Binding Converter={StaticResource TimeToThicknessConverter}, Mode=OneWay}"
                                         Width="{Binding Converter={StaticResource TaskToDurationConverter}, Mode=OneWay}"
@@ -75,7 +75,7 @@
                                            FontWeight="Bold"
                                            Foreground="White"
                                            MinWidth="30"
-                                           FontSize="18" />
+                                           FontSize="16" />
                                 
                                 <TextBlock Text="{Binding}"                                          
                                            FontWeight="Bold"
@@ -86,8 +86,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Line Stroke="Red" StrokeThickness="3" Opacity="50" X1="30" X2="30" Y1="0" Y2="500"/>
-                <Line Stroke="Black" StrokeThickness="1" Opacity="50" X1="100" X2="100" Y1="0" Y2="500"/>
+                <StackPanel>
+                    <Line Stroke="Red" StrokeThickness="3" Opacity="50" X1="30" X2="30" Y1="0" Y2="20"/>
+                </StackPanel>
             </Grid>
         </StackPanel>
             

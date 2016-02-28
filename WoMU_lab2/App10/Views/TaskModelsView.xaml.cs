@@ -29,19 +29,22 @@ namespace App10.Views
 
         private void GoToDetailsPage_OnClick(object sender, RoutedEventArgs e)
         {
-            try {
+            try
+            {
                 if (sender == null) return;
                 App thisApp = Application.Current as App;
                 thisApp.currentTask = (TaskModel)listView.SelectedItems[0];
                 this.Frame.Navigate(typeof(DetailsModelView));
             }
-            catch {
+            catch
+            {
                 return;
             }
 
         }
 
-        private void TextBlock_Loaded(object sender, RoutedEventArgs e) {
+        private void TextBlock_Loaded(object sender, RoutedEventArgs e)
+        {
 
             if (sender == null) return;
 
@@ -50,30 +53,31 @@ namespace App10.Views
             var task = (TaskModel)temp.DataContext;
             temp.Text = "";
             Boolean currentUserAttached = false;
-            
+
 
             //Om tasken har en user och det är nuvarande user.
-            if((int)task.Users.Count() == 1 && thisApp.currentUser.Id == task.Users.ElementAt(0).Id) {
+            if ((int)task.Users.Count() == 1 && thisApp.currentUser.Id == task.Users.ElementAt(0).Id)
+            {
                 temp.Text = "●";
                 temp.Foreground = new SolidColorBrush(Colors.LimeGreen);
                 return;
             }
 
             //Om det finns fler users.
-            for (int i = 0; i < (int)task.Users.Count(); i++) {
+            for (int i = 0; i < (int)task.Users.Count(); i++)
+            {
                 if (task.Users.ElementAt(i).Id == thisApp.currentUser.Id)
                     currentUserAttached = true;
                 temp.Text += "●";
             }
 
             //Om tasken har flera user och en av dom är nuvarande user.
-            if(currentUserAttached)
+            if (currentUserAttached)
                 temp.Foreground = new SolidColorBrush(Colors.Orange);
             //Om tasken är tagen av en annan eller flera users.
             else
                 temp.Foreground = new SolidColorBrush(Colors.Red);
-            
+
         }
-        
     }
 }
